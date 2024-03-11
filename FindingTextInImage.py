@@ -25,12 +25,13 @@ def find_text_on_screen(text):
    
 def click_text():
     pyautogui.rightClick()
-    multiple_space_presses(3, 0.2)
+    press_keycode(32, 3, 0.2)
 
-def multiple_space_presses(presses, interval):
+def press_keycode(keycode, presses, interval):
+    key_name = pyautogui.KEYBOARD_KEYS[keycode]  # Pobierz nazwę klawisza na podstawie kodu klawisza
     for _ in range(presses):
-        pyautogui.keyDown('space')
-        pyautogui.keyUp('space')
+        pyautogui.keyDown(key_name)
+        pyautogui.keyUp(key_name)
         time.sleep(interval)
 
 while True:
