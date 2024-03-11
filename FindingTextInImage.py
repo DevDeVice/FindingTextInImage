@@ -2,7 +2,9 @@ import cv2
 import numpy as np
 import pyautogui   
 import time
-
+import subprocess
+path_to_ahk_exe = "C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey.exe"
+path_to_ahk_script = "C:\\Users\\sejko\\Documents\\AutoHotkey\\KlikniecieSpacji.ahk"
 def find_text_on_screen(text):
     screenshot = pyautogui.screenshot()
     screenshot = np.array(screenshot)
@@ -25,14 +27,7 @@ def find_text_on_screen(text):
    
 def click_text():
     pyautogui.rightClick()
-    press_keycode(32, 3, 0.2)
-
-def press_keycode(keycode, presses, interval):
-    key_name = pyautogui.KEYBOARD_KEYS[keycode]  # Pobierz nazwę klawisza na podstawie kodu klawisza
-    for _ in range(presses):
-        pyautogui.keyDown(key_name)
-        pyautogui.keyUp(key_name)
-        time.sleep(interval)
+    subprocess.Popen([path_to_ahk_exe, path_to_ahk_script])
 
 while True:
     text_location = find_text_on_screen("Kliknij spację jeszcze")
@@ -42,4 +37,4 @@ while True:
         click_text()
     else:
         print("Nie znaleziono")   
-    time.sleep(1)  # Czekaj 1 sekundę przed kolejnym sprawdzeniem ekranu
+    time.sleep(2)  # Czekaj 1 sekundę przed kolejnym sprawdzeniem ekranu
